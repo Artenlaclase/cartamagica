@@ -1,0 +1,25 @@
+---
+interface Props {
+  text: string;
+  color?: 'purple' | 'white';
+  centered?: boolean;
+}
+
+const { text, color = 'purple', centered = true } = Astro.props;
+---
+
+<div class={`mb-12 ${centered ? 'text-center' : 'text-left'}`}>
+  <h2 class={`
+    text-3xl md:text-4xl font-light 
+    ${color === 'purple' ? 'text-purple-800' : 'text-white'}
+    relative pb-4
+  `}>
+    {text}
+    <span class={`
+      absolute bottom-0 left-1/2 transform -translate-x-1/2 
+      w-20 h-1 
+      ${color === 'purple' ? 'bg-purple-500' : 'bg-white'}
+      ${!centered && 'left-0 transform-none'}
+    `}></span>
+  </h2>
+</div>
