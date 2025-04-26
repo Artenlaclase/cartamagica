@@ -1,16 +1,74 @@
 ---
-
+import Hero from '../components/Hero.astro';
+import Title from '../components/Title.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import ContactForm from '../components/ContactForm.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Hero />
+
+<section class="py-16 px-4 max-w-6xl mx-auto">
+  <Title text="Mis Servicios" />
+  <div class="grid md:grid-cols-3 gap-8 mt-12">
+    <ServiceCard 
+      icon="🔮" 
+      title="Tarot Evolutivo" 
+      description="Sesión de 60 minutos para claridad y dirección en tu camino de vida." 
+    />
+    <ServiceCard 
+      icon="💫" 
+      title="Sanación Energética" 
+      description="Limpieza de bloqueos y equilibrio de energía vital." 
+    />
+    <ServiceCard 
+      icon="🌙" 
+      title="Lectura Lunar" 
+      description="Conexión de fases lunares con tu carta natal." 
+    />
+  </div>
+</section>
+
+<!-- Sección Sobre Mí -->
+<section class="py-16 px-4 max-w-6xl mx-auto bg-white">
+  <Title text="Sobre Mí" />
+  <div class="flex flex-col md:flex-row gap-8 items-center mt-12">
+    <img 
+      src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+      alt="Magiastra" 
+      class="w-full md:w-1/2 rounded-lg shadow-xl"
+    />
+    <div class="md:w-1/2">
+      <h3 class="text-2xl font-light text-purple-800 mb-4">Hola, soy Magiastra</h3>
+      <p class="mb-4">Más de 20 años de experiencia combinando tarot tradicional con sanación energética.</p>
+      <p>Mi enfoque es compasivo y orientado a soluciones prácticas para tu crecimiento personal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonios -->
+<section class="py-16 px-4 bg-purple-700 text-white">
+  <div class="max-w-6xl mx-auto">
+    <Title text="Testimonios" color="white" />
+    <div class="grid md:grid-cols-3 gap-8 mt-12">
+      <TestimonialCard 
+        text="La lectura fue increíblemente precisa. Todo se resolvió tal como lo describió." 
+        author="Laura G." 
+      />
+      <TestimonialCard 
+        text="Magiastra tiene un don especial para ofrecer insights que van más allá de lo obvio." 
+        author="Marcos R." 
+      />
+      <TestimonialCard 
+        text="La sanación energética cambió mi vida. Me sentí más ligera y con nueva perspectiva." 
+        author="Sofía M." 
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="py-16 px-4 max-w-6xl mx-auto">
+  <Title text="Contacto" />
+  <ContactForm />
+</section>
