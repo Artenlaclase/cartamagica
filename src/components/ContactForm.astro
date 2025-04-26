@@ -1,28 +1,145 @@
-<form>
-  <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" required>
+---
+// Configuración del correo (debes poner tus datos reales)
+const emailConfig = {
+  serviceId: "service_tarot", // Reemplaza con tu Service ID de EmailJS
+  templateId: "template_contact", // Reemplaza con tu Template ID
+  publicKey: "tu_public_key" // Reemplaza con tu Public Key
+};
+
+// Script para el envío (se carga solo en el cliente)
+const emailJSscript = `
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  
+  document.getElementById('tarot-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = 'Enviando... <span class="animate-pulse">✨</span>';
+    
+    emailjs.init("${emailConfig.publicKey}");
+    emailjs.sendForm(
+      "${emailConfig.serviceId}", 
+      "${emailConfig.templateId}", 
+      e.target
+    ).then(() => {
+      btn.innerHTML = '✓ Mensaje Enviado!';
+      e.target.reset();
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar Mensaje';
+        btn.disabled = false;
+      }, 3000);
+    }, (error) => {
+      btn.innerHTML = 'Error, intenta nuevamente';
+      console.error('EmailJS error:', error);
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar Mensaje';
+        btn.disabled = false;
+      }, 3000);
+    });
+  });
+`;
+---
+
+<form 
+  id="tarot-form"
+  class="max-w-2xl mx-auto bg-purple-600 p-8 rounded-xl shadow-lg space-y-6 border border-purple-900/50"
+>
+  <!-- Campo Nombre -->
+  <div class="space-y-2">
+    <label for="nombre" class="block text-sm font-medium text-purple-200">Nombre</label>
+    <input 
+      type="text" 
+      name="user_name"
+      id="nombre" 
+      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+      required
+      placeholder="Tu nombre completo"
+    >
   </div>
   
-  <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+  <!-- Campo Email -->
+  <div class="space-y-2">
+    <label for="email" class="block text-sm font-medium text-purple-200">Email</label>
+    <input 
+      type="email" 
+      name="user_email"
+      id="email" 
+      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+      required
+      placeholder="tucorreo@ejemplo.com"
+    >
   </div>
   
-  <div class="form-group">
-      <label for="servicio">Servicio de interés</label>
-      <select id="servicio">
-          <option value="tarot">Lectura de Tarot</option>
-          <option value="sanacion">Sanación Energética</option>
-          <option value="lunar">Lectura Lunar</option>
-          <option value="otro">Otro</option>
-      </select>
+  <!-- Selector de Servicio -->
+  <div class="space-y-2">
+    <label for="servicio" class="block text-sm font-medium text-purple-200">Servicio de interés</label>
+    <select 
+      name="service_type"
+      id="servicio"
+      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
+    >
+      <option value="Lectura de Tarot">Lectura de Tarot</option>
+      <option value="Sanación Energética">Sanación Energética</option>
+      <option value="Lectura Lunar">Lectura Lunar</option>
+      <option value="Otro">Otro</option>
+    </select>
   </div>
   
-  <div class="form-group">
-      <label for="mensaje">Tu mensaje o pregunta</label>
-      <textarea id="mensaje" required></textarea>
+  <!-- Área de Mensaje -->
+  <div class="space-y-2">
+    <label for="mensaje" class="block text-sm font-medium text-purple-200">Tu mensaje o pregunta</label>
+    <textarea 
+      name="message"
+      id="mensaje" 
+      rows="4"
+      class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+      required
+      placeholder="Describe tu consulta..."
+    ></textarea>
   </div>
   
-  <button type="submit" class="btn">Enviar Mensaje</button>
+  <!-- Botón de Submit -->
+  <button 
+    id="submit-btn"
+    type="submit" 
+    class="w-full bg-purple-700 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-all hover:shadow-md active:scale-95 flex items-center justify-center gap-2"
+  >
+    Enviar Mensaje
+  </button>
 </form>
+
+<!-- Cargamos EmailJS y el script solo en el cliente -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script is:inline>
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  
+  document.getElementById('tarot-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = 'Enviando... <span class="animate-pulse">✨</span>';
+    
+    emailjs.init("tu_public_key");
+    emailjs.sendForm(
+      "service_tarot", 
+      "template_contact", 
+      e.target
+    ).then(() => {
+      btn.innerHTML = '✓ Mensaje Enviado!';
+      e.target.reset();
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar Mensaje';
+        btn.disabled = false;
+      }, 3000);
+    }, (error) => {
+      btn.innerHTML = 'Error, intenta nuevamente';
+      console.error('EmailJS error:', error);
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar Mensaje';
+        btn.disabled = false;
+      }, 3000);
+    });
+  });
+</script>
