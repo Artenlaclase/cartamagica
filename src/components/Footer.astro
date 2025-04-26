@@ -1,0 +1,35 @@
+---
+const currentYear = new Date().getFullYear();
+const socialLinks = [
+  { icon: "📱", name: "WhatsApp" },
+  { icon: "📘", name: "Facebook" },
+  { icon: "📸", name: "Instagram" },
+  { icon: "🎥", name: "YouTube" }
+];
+---
+
+<footer class="bg-gradient-to-br from-purple-900 to-purple-950 text-white py-10">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <div class="flex justify-center space-x-6 mb-6">
+      {
+        socialLinks.map(link => (
+          <a 
+            href="#" 
+            class="text-2xl hover:text-purple-300 transition-colors"
+            aria-label={link.name}
+          >
+            {link.icon}
+          </a>
+        ))
+      }
+    </div>
+    
+    <p class="mb-2">© {currentYear} Magiastra - Tarot Evolutivo y Sanación Energética</p>
+    <p class="text-sm text-purple-300">Todos los derechos reservados | Diseño con 💜</p>
+    
+    <div class="mt-6 pt-6 border-t border-purple-800 text-xs text-purple-400">
+      <a href="#" class="hover:text-white">Política de Privacidad</a> | 
+      <a href="#" class="hover:text-white">Términos de Servicio</a>
+    </div>
+  </div>
+</footer>
