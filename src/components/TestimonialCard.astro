@@ -1,0 +1,9 @@
+---
+const { text, author } = Astro.props;
+---
+
+<div class="bg-purple-600 bg-opacity-20 p-8 rounded-xl relative">
+  <span class="absolute top-0 left-0 text-6xl opacity-10">"</span>
+  <p class="relative z-10">{text}</p>
+  <p class="font-bold mt-4 text-right italic">- {author}</p>
+</div>
