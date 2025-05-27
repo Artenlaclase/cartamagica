@@ -7,7 +7,8 @@ export default defineConfig({
   integrations: [],
   vite: {
     css: {
-      postcss: './postcss.config.cjs',
+         postcss: {
+           plugins: [require('tailwindcss'), require('autoprefixer')],},
     },
   },
 });
