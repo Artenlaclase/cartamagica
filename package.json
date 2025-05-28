@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+     "postbuild": "tailwindcss -i ./src/styles/globals.css -o ./dist/assets/tailwind.css --minify",
     "preview": "astro preview",
     "astro": "astro"
   },

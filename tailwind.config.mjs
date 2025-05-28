@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-    './public/**/*.html'
+    "./src/**/*.{astro,html,js,jsx,ts,tsx}",
+    "./node_modules/astro/**/*.js" // Important for Vercel
   ],
   theme: {
     extend: {
@@ -16,13 +16,14 @@ module.exports = {
     },
   },
   plugins: [],
-  important: true,
-  corePlugins: {
-    preflight: true,
-  },
   safelist: [
-    'bg-purple-700', 
-    'text-purple-800',
-    // Add other classes you want to always include
+    { pattern: /(bg|text|border)-purple-(50|700|800)/ },
+    'max-w-6xl',
+    'py-16',
+    'px-4',
+    'md:grid-cols-3',
+    'grid',
+    'gap-8',
+    'mt-12'
   ]
 }
