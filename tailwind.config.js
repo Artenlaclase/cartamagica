@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-      "./public/**/*.html"
+    './public/**/*.html'
   ],
   theme: {
     extend: {
@@ -16,4 +16,13 @@ module.exports = {
     },
   },
   plugins: [],
+  important: true,
+  corePlugins: {
+    preflight: true,
+  },
+  safelist: [
+    'bg-purple-700', 
+    'text-purple-800',
+    // Add other classes you want to always include
+  ]
 }

@@ -1,14 +1,17 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
+import tailwind from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
-  base: '/cartamagica/', // Cambia esto por el nombre de tu repositorio
+  base: '/cartamagica/',
   trailingSlash: 'ignore',
   integrations: [],
   vite: {
     css: {
-         postcss: {
-           plugins: [require('tailwindcss'), require('autoprefixer')],},
+      postcss: {
+        plugins: [tailwind(), autoprefixer()],
+      },
     },
   },
 });
